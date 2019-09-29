@@ -3,7 +3,7 @@ nagios monitoring module for checking one or mulitple processes not running.
 There is already a nagios plugin check_process, but it has a bug
 - https://github.com/mickem/nscp/issues/587 (check_process is unexpectedly case-sensitive #587)
 
-Version 0.1 (20190928)
+Version 0.11 (20190929)
 
 Copyright Toni Feric, Belsoft Collaboration AG 
 Feedback toni.feric@belsoft.ch 
@@ -24,8 +24,8 @@ import argparse, psutil, sys
 
 psCheck = []
 psList = {}
-psListRunning = []
-psListNotRunning = []
+psCheckRunning = []
+psCheckNotRunning = []
 
 def argsParse():
     # Parse arguments passed to this script
@@ -36,7 +36,7 @@ def argsParse():
     return args
 
 def getPsListLower():
-    # Get a list of all process names running on the system (converted to lower case) and return them as a dictionary
+    # Get process list (process table) from system (converted to lower case) and return them as a dictionary
     for ps in psutil.process_iter():
         psList[ps.name().lower()] = ''
     return psList
@@ -47,15 +47,15 @@ def isPsRunning(psCheck):
         return 1
     return 0
 
-def checkAllArguments(psList):
+def checkPsNames(psList):
     # Check all strings if they are a running process or not
     for p in psCheck:
         if args.debug:
             print("DEBUG: checking process p:",p.lower())
         if isPsRunning(p.lower()):
-            psListRunning.append(p)
+            psCheckRunning.append(p)
         else:
-            psListNotRunning.append(p)
+            psCheckNotRunning.append(p)
     return 1
 
 args = argsParse()
@@ -66,15 +66,15 @@ if args.debug:
 psCheck = args.processName
 getPsListLower()
 
-# Do the checks and return in a nagios manner
-if checkAllArguments(psList):
-    if len(psListNotRunning) == 0:
+# Do the checks (running/not running) and exit in a nagios manner
+if checkPsNames(psList):
+    if len(psCheckNotRunning) == 0:
         # All processes are running
-        print("OK - all processes running.",', '.join(psListRunning))
+        print("OK - all processes running.",', '.join(psCheckRunning))
         exit(0)
-    elif len(psListNotRunning) <= len(psCheck):
+    elif len(psCheckNotRunning) <= len(psCheck):
         # At least one process is not running
-        print("CRITICAL -",', '.join(psListNotRunning),"not running.")
+        print("CRITICAL -",', '.join(psCheckNotRunning),"not running.")
         exit(2)
     else:
         print("UNKNOWN - Too many failed processes.")
