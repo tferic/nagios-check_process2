@@ -3,7 +3,7 @@ nagios monitoring module for checking one or mulitple processes not running.
 There is already a nagios plugin check_process, but it has a bug
 - https://github.com/mickem/nscp/issues/587 (check_process is unexpectedly case-sensitive #587)
 
-Version 0.11 (20190929)
+Version 0.12 (20191003)
 
 Copyright Toni Feric, Belsoft Collaboration AG 
 Feedback toni.feric@belsoft.ch 
@@ -21,6 +21,7 @@ THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 '''
 
 import argparse, psutil, sys
+from sys import exit
 
 psCheck = []
 psList = {}
