@@ -11,10 +11,10 @@ Hence, this module may help as a workaround, until the bug in **check_process** 
 - Edit your nsclient.conf and add these changes:  
 ```
 [/settings/NRPE/server]  
-allow arguments=false  
+allow arguments=true  
 
 [/settings/external scripts]  
-allow arguments=false  
+allow arguments=true  
 
 [/settings/external scripts/scripts]  
 check_process2=scripts\check_process2.exe %ARGS%  
