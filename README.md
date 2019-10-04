@@ -8,7 +8,7 @@ Hence, this module may help as a workaround, until the bug in **check_process** 
 # Deployment
 ## NSClient++
 - Copy the "check_process2.exe" to your NSClient++\scripts folder.  
-   - If an antivirus program deletes the file, try either code-signing this exe with a trusted certificate, or exclude the "scripts" folder from scanning.
+   - If an antivirus program deletes the file, try either code-signing this exe with a trusted certificate, or exclude the exe from scanning.
 - Edit your nsclient.conf and make these changes:  
 ```
 [/settings/NRPE/server]  
