@@ -8,7 +8,7 @@ Hence, this module may help as a workaround, until the bug in **check_process** 
 # Deployment
 ## NSClient++
 - Copy the "check_process2.exe" to your NSClient++\scripts folder.  
-- Edit your nsclient.conf and add these changes:  
+- Edit your nsclient.conf and make these changes:  
 ```
 [/settings/NRPE/server]  
 allow arguments=true  
