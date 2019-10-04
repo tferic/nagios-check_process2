@@ -32,7 +32,7 @@ define command{
 ```
 Make sure to replace the exe names with your own.  
   
-Define a service:  
+Define a service (or use the new check command in your existing service):  
 ```
 define service{
         service_description     MyApplicationCoreProcesses
