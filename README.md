@@ -22,7 +22,7 @@ check_process2=scripts\check_process2.exe %ARGS%
 ```
 - Restart the NSClient++ Service  
 
-# Nagios Server
+## Nagios Server
 Define a check command:  
 ```
 define command{  
